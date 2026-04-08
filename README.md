@@ -124,12 +124,6 @@ Get-Process Weixin,WeChat -ErrorAction SilentlyContinue | Select-Object Id,Proce
 - 关注后端日志关键字：`[wxhook]`、`InitializeHook failed`
 - 先验证后端接口可用：`GET /api/v1/system/status`
 - 在故障定位时尽量保持单一微信实例，减少 PID 歧义
-
-## 致谢
-- 本项目的开发过程中参考了以下优秀的开源项目和资源：
-- wx_key - 微信数据库与图片密钥提取工具
-- wetrace -go语言加re'ce'a't说明
-
 - 后端主配置：`backend/src/main/resources/application.yml`
 - 本地密钥缓存：项目根目录 `.env`
 
