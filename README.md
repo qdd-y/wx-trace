@@ -1,6 +1,6 @@
 # WeTrace Java
 
-PC 微信聊天记录取证与分析工具（Java 重构版）。
+PC 微信聊天记录导出
 
 - 后端：Spring Boot 3（Java 17）
 - 前端：Vue 3 + Vite
