@@ -1,0 +1,95 @@
+server:
+  port: 8080
+  address: 127.0.0.1
+
+spring:
+  application:
+    name: WeTrace
+
+  # 临时禁用数据源/JPA自动装配，便于无数据库配置下先启动接口
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+
+  # 静态资源（SPA fallback）
+  web:
+    resources:
+      static-locations: classpath:/static/
+      add-mappings: false
+
+  # 文件上传限制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  # Thymeleaf（HTML 导出模板）
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+
+  # Jackson JSON
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+# WeTrace 业务配置
+wetrace:
+  # 工作目录（存放解密后的数据库）
+  work-dir: data
+
+  # 微信数据源路径（默认自动探测）
+  wechat-db-src-path: ""
+
+  # 微信安装路径（默认自动探测）
+  wechat-path: ""
+
+  # DLL 路径（默认使用内嵌）
+  wxkey-dll-path: ""
+
+  # 解密密钥（从 .env 或此配置读取）
+  wechat-db-key: ""
+  image-key: ""
+  xor-key: ""
+
+  # AI 配置
+  ai-enabled: false
+  ai-provider: openai  # openai / deepseek / zhipu / ollama
+  ai-api-key: ""
+  ai-base-url: ""
+  ai-model: gpt-4o-mini
+
+  # 飞书配置
+  feishu:
+    enabled: false
+    app-id: ""
+    app-secret: ""
+    bot-id: ""
+    webhook-url: ""
+
+  # 备份目录
+  backup-dir: backup
+
+  # 密码保护
+  password-protected: false
+  password-hash: ""
+
+# 日志配置
+logging:
+  level:
+    com.wetrace: INFO
+    com.wetrace.native: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# 跨域（开发时允许前端 localhost:5173）
+cors:
+  allowed-origins:
+    - http://127.0.0.1:5173
+    - http://localhost:5173
